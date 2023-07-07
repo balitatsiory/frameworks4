@@ -17,7 +17,7 @@ public class ModelView {
 
     public ModelView(String view,HashMap<String,Object> data) {
         this.view = view;
-        this.data=data;
+        this.data = data;
     }
 
     public String getView() {
@@ -34,5 +34,11 @@ public class ModelView {
     
     public void setData(HashMap<String,Object> data){
         this.data=data;
+    }
+    
+    public void addItem(String cle,Object objet){
+        //HashMap<String,Object> map=new HashMap<String,Object>();
+        this.data.put(cle,objet);
+        //this.setData(map);
     }
 }
