@@ -6,6 +6,7 @@
 package personne;
 
 import annotation.Myannotation;
+import java.util.HashMap;
 import traitment.ModelView;
 
 /**
@@ -41,7 +42,9 @@ public class Emp {
     
     @Myannotation(value="empall")
     public ModelView getallemployer(){
-        ModelView view=new ModelView("AffichageEmp.jsp");
+        HashMap<String,Object> map=new HashMap<String,Object>();
+        map.put("empall",34);
+        ModelView view=new ModelView("AffichageEmp.jsp",map);
         return view;
     }
     
