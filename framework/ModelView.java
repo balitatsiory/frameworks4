@@ -20,6 +20,10 @@ public class ModelView {
         this.data = data;
     }
 
+    public ModelView(){
+        
+    }
+
     public String getView() {
         return view;
     }

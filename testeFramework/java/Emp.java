@@ -56,4 +56,16 @@ public class Emp {
         view.addItem("attribut",this.getNom());
         return view;
     }
+
+    @Myannotation(value="ajoute_numero")
+    public ModelView ajouteNumero(int numero,String nom){
+        HashMap<String,Object> map=new HashMap<String,Object>();
+        ModelView view=new ModelView("AffichageEmp.jsp",map);
+        String soratra="";
+        for(int i=0;i<numero;i++){
+            soratra=soratra+nom;
+        }
+        view.addItem("attribut",soratra);
+        return view;
+    }
 }

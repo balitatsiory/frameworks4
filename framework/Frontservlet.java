@@ -54,10 +54,15 @@ public class Frontservlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
+
         try (PrintWriter out = response.getWriter()) {
-            out.print("eto");
             Utilitaire u=new Utilitaire();
+            
             String url=request.getPathInfo();
+
+            String urlQuery=request.getQueryString();   //url apres le ?
+        
+
             String annotation=u.getAnnotation(url);
             Fonction fonction=new Fonction();
            
@@ -81,7 +86,8 @@ public class Frontservlet extends HttpServlet {
                         }
                     }
                 //recuperation valeur input//
-                ModelView invomethode=fonction.invocationMethode(annotation, MappingUrls,instance);
+                String[] listeArgument=u.getArgument(urlQuery);
+                ModelView invomethode=fonction.invocationMethode(annotation, MappingUrls,instance,listeArgument);
                 HashMap<String,Object> mapView=invomethode.getData();
                 Set<String> key=mapView.keySet();
                 String[] listeCle=key.toArray(new String[key.size()]);
