@@ -21,7 +21,6 @@ public class Utilitaire {
         return tableau;
     }
 
-        
     public String getAnnotation(String url){
         String[] tableau=decomposer(url);
         int indice=tableau.length-1;

@@ -8,14 +8,21 @@ package personne;
 import annotation.Myannotation;
 import java.util.HashMap;
 import traitment.ModelView;
+import traitment.FileUpload;
 
 /**
  *
  * @author ITU
  */
+
+
+/*
+    les annotations doivent tjrs se terminer par .do
+ */
 public class Emp {
     int Id;
     String Nom;
+    FileUpload File;
 
     public Emp(){}
      
@@ -35,12 +42,20 @@ public class Emp {
     public String getNom() {
         return Nom;
     }
+
+    public FileUpload getFile(){
+        return this.File;
+    }
     
     public void setNom(String nom) {
         this.Nom = nom;
     }
+
+    public void setFile(FileUpload file){
+        this.File=file;
+    }
     
-    @Myannotation(value="empall")
+    @Myannotation(value="empall.do")
     public ModelView getallemployer(){
         HashMap<String,Object> 
         map=new HashMap<String,Object>();
@@ -48,16 +63,18 @@ public class Emp {
         view.addItem("attribut",34);
         return view;
     }
-    
-    @Myannotation(value="add_Emp")
+
+    //regle: la classe emp doit comporter Un attribut FileUpload
+    @Myannotation(value="add_Emp.do")
     public ModelView save(){
         HashMap<String,Object> map=new HashMap<String,Object>();
         ModelView view=new ModelView("AffichageEmp.jsp",map);
-        view.addItem("attribut",this.getNom());
+        this.getFile().upload("C:/perso/film");
+        view.addItem("attribut",this.getFile().getName());
         return view;
     }
 
-    @Myannotation(value="ajoute_numero")
+    @Myannotation(value="ajoute_numero.do")
     public ModelView ajouteNumero(int numero,String nom){
         HashMap<String,Object> map=new HashMap<String,Object>();
         ModelView view=new ModelView("AffichageEmp.jsp",map);
