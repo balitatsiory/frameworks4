@@ -6,19 +6,13 @@
 package personne;
 
 import annotation.Myannotation;
+import annotation.Singleton;
 import java.util.HashMap;
 import traitment.ModelView;
 import traitment.FileUpload;
 
-/**
- *
- * @author ITU
- */
 
-
-/*
-    les annotations doivent tjrs se terminer par .do
- */
+@Singleton
 public class Emp {
     int Id;
     String Nom;

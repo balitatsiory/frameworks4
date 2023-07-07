@@ -1,0 +1,35 @@
+
+2023-07-03 16:13:50 Apache Commons Daemon procrun stdout initialized.
+1688428800
+1688428800
+1688428800
+1688428800
+1688428800
+blabla 1688428800
+blabla 1688428800
+blabla 1688428800
+blabla 1688428800
+blabla 1688428800
+blabla 1688428800
+blabla 1688428800
+blabla 1688428800
+blabla 1688428800
+blabla 1688428800
+blabla 1688428800
+blabla 1688428800
+blabla 1688428800
+blabla 1688428800
+blabla 1688428800
+blabla 1688428800
+blabla 1688428800
+blabla 1688428800
+blabla 1688428800
+org.postgresql.util.PSQLException: ERREUR: la colonne « nombrefototra » de la relation « recolte » n'existe pas
+  Position : 33
+org.postgresql.util.PSQLException: Le nom de colonne nombrefototra n'a pas été trouvé dans ce ResultSet.
+org.postgresql.util.PSQLException: Le nom de colonne nombrefototra n'a pas été trouvé dans ce ResultSet.
+org.postgresql.util.PSQLException: Le nom de colonne nombrefototra n'a pas été trouvé dans ce ResultSet.
+h NaN
+p NaN
+c 3.0
+c 6.0

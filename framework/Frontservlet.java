@@ -29,6 +29,8 @@ import javax.servlet.RequestDispatcher;
 import traitment.Fonction;
 import traitment.ModelView;
 import traitment.FileUpload;
+import annotation.Myannotation;
+import annotation.Singleton;
 
 
 /**
@@ -51,12 +53,18 @@ public class Frontservlet extends HttpServlet {
     */
     
    HashMap<String,Mapping> MappingUrls;
+   HashMap<Class,Object> listeClasseSingleton;
 
    public void init() throws ServletException{
         String url = getServletContext().getRealPath("/");   
         Fonction fonction=new Fonction();
        try {    
            MappingUrls=fonction.listeHashMapAllClass(url);
+           try{
+           listeClasseSingleton=fonction.listeClasseSingleton(url);
+           }catch(Exception e){
+                
+           }
        } catch (ClassNotFoundException ex) {
            Logger.getLogger(Frontservlet.class.getName()).log(Level.SEVERE, null, ex);
        }
@@ -78,10 +86,12 @@ public class Frontservlet extends HttpServlet {
             try{
                 Mapping mapping=fonction.getMapping(annotation, MappingUrls);
                 //recuperation valeur input//  
-                    Class classe=fonction.getClass(annotation,MappingUrls);
-                    Field[] listeAttribut=classe.getDeclaredFields();
-                    Object instance=classe.newInstance();
 
+                    Object instance=fonction.getClass(annotation,MappingUrls,listeClasseSingleton);
+                    Field[] listeAttribut=instance.getClass().getDeclaredFields();
+
+                    fonction.initialiserObject(instance,listeAttribut);
+                
                     for(int i=0;i<listeAttribut.length;i++){
                         if(listeAttribut[i].getType().getSimpleName().equals("FileUpload")==false){
                             String attEnvoie=request.getParameter(listeAttribut[i].getName());
@@ -95,15 +105,20 @@ public class Frontservlet extends HttpServlet {
                                 instance.getClass().getMethod("set"+listeAttribut[i].getName(),int.class).invoke(instance,Integer.parseInt(attEnvoie));
                             }
                         }else{
-                            Part attEnvoie=request.getPart(listeAttribut[i].getName());
-                            String nomFile=attEnvoie.getSubmittedFileName();
-                            byte[] bits=new byte[(int) attEnvoie.getSize()];
-                            //mameno an ilay tableau de byte
-                            DataInputStream dis=new DataInputStream(attEnvoie.getInputStream());
-                            dis.readFully(bits);
-                            dis.close();
-                            FileUpload fileUpload=new FileUpload(nomFile,bits);
-                            instance.getClass().getMethod("set"+listeAttribut[i].getName(),FileUpload.class).invoke(instance,fileUpload);
+                            try{
+                                Part attEnvoie=request.getPart(listeAttribut[i].getName());
+                                out.print(attEnvoie);
+                                String nomFile=attEnvoie.getSubmittedFileName();
+                                byte[] bits=new byte[(int) attEnvoie.getSize()];
+                                //mameno an ilay tableau de byte
+                                DataInputStream dis=new DataInputStream(attEnvoie.getInputStream());
+                                dis.readFully(bits);
+                                dis.close();
+                                FileUpload fileUpload=new FileUpload(nomFile,bits);
+                                instance.getClass().getMethod("set"+listeAttribut[i].getName(),FileUpload.class).invoke(instance,fileUpload);
+                            }catch(Exception e){
+
+                            }
                         }
                     }
                 //recuperation valeur input//
@@ -116,8 +131,10 @@ public class Frontservlet extends HttpServlet {
                 for(int i=0;i<listeCle.length;i++){
                     request.getSession().setAttribute(listeCle[i],mapView.get(listeCle[listeCle.length-1]));
                 }
+
                 
-                response.sendRedirect(request.getContextPath()+"/"+invomethode.getView());
+
+               response.sendRedirect(request.getContextPath()+"/"+invomethode.getView());
             }catch(Exception ex){
                 out.print(ex);
             }

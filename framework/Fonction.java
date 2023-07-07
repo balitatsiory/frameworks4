@@ -6,6 +6,7 @@
 package traitment;
 
 import annotation.Myannotation;
+import annotation.Singleton;
 import etu1903.frameworki.Mapping;
 import java.io.File;
 import java.lang.reflect.Field;
@@ -86,8 +87,24 @@ public class Fonction {
         }
         return newmap;
     }
-    
-    
+
+
+    /*liste class qui a une annotation singleton*/
+    public HashMap<Class,Object> listeClasseSingleton(String pathProjet)throws Exception{
+        Vector<String> listeClasse=this.listeClasse(pathProjet);
+        HashMap<Class,Object> newmap=new HashMap<Class,Object>(); 
+        Class classe;
+        Object instance;
+        for(int i=0;i<listeClasse.size();i++){
+            classe=Class.forName(listeClasse.get(i));
+            instance=classe.newInstance();
+            if(classe.isAnnotationPresent(Singleton.class)){
+                newmap.put(classe,instance);
+            }
+        }
+        return newmap;
+    } 
+
    public Mapping getMapping(String annotation,HashMap<String,Mapping> hashmap) throws Exception{
        Mapping mapping=hashmap.get(annotation);
        if(mapping==null)
@@ -95,15 +112,21 @@ public class Fonction {
        return mapping;
    }
    
-   public Class getClass(String annotation,HashMap<String,Mapping> hashmap) throws ClassNotFoundException, Exception{
+   public Object getClass(String annotation,HashMap<String,Mapping> hashmap,HashMap<Class,Object> listeClasseSingleton) throws ClassNotFoundException, Exception{
        Mapping mapping=getMapping(annotation,hashmap);
+       Object  objet;
        Class classe=Class.forName(mapping.getClassname());
-       return classe;
+       if(listeClasseSingleton.containsKey(classe)){
+            objet=listeClasseSingleton.get(classe);
+        }else{
+            objet=classe.newInstance();
+        }
+       return objet;
    }
    
-   public Field[] listeAttribut(String annotation,HashMap<String,Mapping> hashmap) throws Exception{
-       Class classe=getClass(annotation,hashmap);
-       Field[] listeAttribut=classe.getDeclaredFields();
+   public Field[] listeAttribut(String annotation,HashMap<String,Mapping> hashmap,HashMap<Class,Object> listeClasseSingleton) throws Exception{
+       Object object=getClass(annotation,hashmap,listeClasseSingleton);
+       Field[] listeAttribut=object.getClass().getDeclaredFields();
        return listeAttribut;
    }
 
@@ -129,7 +152,7 @@ public class Fonction {
         regle de l'appel de fonction:
             1-tsy maintsy mitovy ny filaharan ilay arguments sy ireo arguments apetraka eny amn lien
                 ex : fonction= addEmp(int numero,String nom)
-                     lien= /do/add_EmpAnnotation?numero=1&nom=thoy
+                     lien= /do/add_EmpAnnotation?numero=1&nom=thony
             2-asina ? alohany itanisana argument eo amn lien
             3-ny separateur ny chaque argument dia &
     */
@@ -161,5 +184,18 @@ public class Fonction {
             resultat=(ModelView)methode.invoke(instance);       //si la fonction n'a pas d'argument
        }
        return resultat;
+   }
+
+
+   public void initialiserObject(Object objet,Field[] listeAttribut) throws Exception{
+        for(Field f : listeAttribut){
+            f.setAccessible(true);
+            if(f.getType().getSimpleName().equals("String"))
+                f.set(objet,"");
+            if(f.getType().getSimpleName().equals("int"))
+                f.set(objet,0);
+            if(f.getType().getSimpleName().equals("double"))
+                f.set(objet,0);
+        }
    }
 }

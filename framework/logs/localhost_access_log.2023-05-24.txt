@@ -1,0 +1,15 @@
+0:0:0:0:0:0:0:1 - - [24/May/2023:00:41:29 +0200] "GET /testeFramework/add_Emp HTTP/1.1" 404 707
+0:0:0:0:0:0:0:1 - - [24/May/2023:00:41:31 +0200] "GET /testeFramework/ HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [24/May/2023:00:41:31 +0200] "GET /testeFramework/ HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [24/May/2023:00:41:31 +0200] "GET /testeFramework/ HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [24/May/2023:00:41:31 +0200] "GET /testeFramework/ HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [24/May/2023:00:41:32 +0200] "GET /testeFramework/ HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [24/May/2023:00:41:32 +0200] "GET /testeFramework/ HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [24/May/2023:00:41:58 +0200] "GET /testeFramework/do/ajoute_numero HTTP/1.1" 200 63
+0:0:0:0:0:0:0:1 - - [24/May/2023:00:42:37 +0200] "GET /testeFramework/do/ajoute_numero?numero=1 HTTP/1.1" 200 63
+0:0:0:0:0:0:0:1 - - [24/May/2023:00:42:55 +0200] "GET /testeFramework/do/add_Emp?Nom=societe HTTP/1.1" 302 -
+0:0:0:0:0:0:0:1 - - [24/May/2023:00:42:55 +0200] "GET /testeFramework/AffichageEmp.jsp HTTP/1.1" 200 213
+0:0:0:0:0:0:0:1 - - [24/May/2023:00:44:54 +0200] "GET /testeFramework/do/add_Emp?Nom=societe HTTP/1.1" 302 -
+0:0:0:0:0:0:0:1 - - [24/May/2023:00:44:54 +0200] "GET /testeFramework/AffichageEmp.jsp HTTP/1.1" 200 213
+0:0:0:0:0:0:0:1 - - [24/May/2023:00:46:36 +0200] "GET /testeFramework/do/empall HTTP/1.1" 302 -
+0:0:0:0:0:0:0:1 - - [24/May/2023:00:46:36 +0200] "GET /testeFramework/AffichageEmp.jsp HTTP/1.1" 200 208

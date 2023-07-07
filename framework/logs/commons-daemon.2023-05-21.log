@@ -1,0 +1,19 @@
+[2023-05-21 12:47:19] [info]  [ 5580] Apache Commons Daemon procrun (1.3.1.0 64-bit) started.
+[2023-05-21 12:47:20] [info]  [ 5580] Running Service 'Tomcat9'...
+[2023-05-21 12:47:20] [info]  [ 7232] Starting service...
+[2023-05-21 12:47:23] [info]  [ 7232] Service started in 3066 milliseconds.
+[2023-05-21 13:45:10] [info]  [14044] Console SHUTDOWN event signaled.
+[2023-05-21 13:45:10] [info]  [14044] Stopping service...
+[2023-05-21 13:45:11] [info]  [14044] Service stop thread completed.
+[2023-05-21 13:45:11] [info]  [ 5580] Run service finished.
+[2023-05-21 13:45:11] [info]  [ 5580] Apache Commons Daemon procrun finished.
+[2023-05-21 13:45:39] [info]  [ 5032] Apache Commons Daemon procrun (1.3.1.0 64-bit) started.
+[2023-05-21 13:45:39] [info]  [ 5032] Running Service 'Tomcat9'...
+[2023-05-21 13:45:39] [info]  [ 6652] Starting service...
+[2023-05-21 13:45:42] [info]  [ 6652] Service started in 2056 milliseconds.
+[2023-05-22 07:09:14] [info]  [ 5032] Service SERVICE_CONTROL_INTERROGATE signalled.
+[2023-05-22 15:31:44] [info]  [42088] Console SHUTDOWN event signaled.
+[2023-05-22 15:31:44] [info]  [42088] Stopping service...
+[2023-05-22 15:31:45] [info]  [42088] Service stop thread completed.
+[2023-05-22 15:31:45] [info]  [ 5032] Run service finished.
+[2023-05-22 15:31:45] [info]  [ 5032] Apache Commons Daemon procrun finished.

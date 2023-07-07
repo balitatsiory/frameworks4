@@ -38,7 +38,6 @@ public class FileUpload {
         }catch(Exception ef){
             System.out.println(ef);
         }
-        System.out.println("tafatafatafatatafatafataftataft");
     }
 
 }
