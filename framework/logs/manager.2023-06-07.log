@@ -1,0 +1,5 @@
+07-Jun-2023 09:33:53.251 INFOS [http-nio-8080-exec-143] org.apache.catalina.core.ApplicationContext.log HTMLManager: init: Associated with Deployer 'Catalina:type=Deployer,host=localhost'
+07-Jun-2023 09:33:53.251 INFOS [http-nio-8080-exec-143] org.apache.catalina.core.ApplicationContext.log HTMLManager: init: Global resources are available
+07-Jun-2023 09:33:53.267 INFOS [http-nio-8080-exec-143] org.apache.catalina.core.ApplicationContext.log HTMLManager: list: Listing contexts for virtual host 'localhost'
+07-Jun-2023 11:28:18.893 INFOS [http-nio-8080-exec-162] org.apache.catalina.core.ApplicationContext.log HTMLManager: list: Listing contexts for virtual host 'localhost'
+07-Jun-2023 12:06:05.948 INFOS [http-nio-8080-exec-207] org.apache.catalina.core.ApplicationContext.log HTMLManager: list: Listing contexts for virtual host 'localhost'

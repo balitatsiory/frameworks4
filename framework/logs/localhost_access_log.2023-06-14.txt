@@ -1,0 +1,17 @@
+0:0:0:0:0:0:0:1 - - [14/Jun/2023:02:15:28 +0200] "GET / HTTP/1.1" 200 11428
+0:0:0:0:0:0:0:1 - - [14/Jun/2023:02:15:31 +0200] "GET /manager/html HTTP/1.1" 401 2562
+0:0:0:0:0:0:0:1 - thony [14/Jun/2023:02:15:32 +0200] "GET /manager/html HTTP/1.1" 200 34716
+0:0:0:0:0:0:0:1 - - [14/Jun/2023:02:15:38 +0200] "GET /testeFramework/ HTTP/1.1" 200 609
+0:0:0:0:0:0:0:1 - - [14/Jun/2023:02:15:42 +0200] "GET /testeFramework/ HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [14/Jun/2023:02:16:45 +0200] "GET / HTTP/1.1" 200 11428
+0:0:0:0:0:0:0:1 - thony [14/Jun/2023:02:16:47 +0200] "GET /manager/html HTTP/1.1" 200 31585
+0:0:0:0:0:0:0:1 - thony [14/Jun/2023:02:16:50 +0200] "GET /manager/html/list?org.apache.catalina.filters.CSRF_NONCE=4515868BEC159CFAFAE1CF65B94552A3 HTTP/1.1" 200 31585
+0:0:0:0:0:0:0:1 - - [14/Jun/2023:02:17:01 +0200] "GET /testeFramework/empall.do HTTP/1.1" 404 709
+0:0:0:0:0:0:0:1 - - [14/Jun/2023:02:17:05 +0200] "GET /testeFramework/empall HTTP/1.1" 404 706
+0:0:0:0:0:0:0:1 - - [14/Jun/2023:02:17:21 +0200] "GET /testeFramework/do/ajoute_numero?numero=1 HTTP/1.1" 200 57
+0:0:0:0:0:0:0:1 - - [14/Jun/2023:02:17:26 +0200] "GET /testeFramework/do/empall HTTP/1.1" 302 -
+0:0:0:0:0:0:0:1 - - [14/Jun/2023:02:17:27 +0200] "GET /testeFramework/AffichageEmp.jsp HTTP/1.1" 200 208
+0:0:0:0:0:0:0:1 - - [14/Jun/2023:02:17:40 +0200] "GET /testeFramework/do/empall HTTP/1.1" 302 -
+0:0:0:0:0:0:0:1 - - [14/Jun/2023:02:17:40 +0200] "GET /testeFramework/AffichageEmp.jsp HTTP/1.1" 200 208
+192.168.10.70 - - [14/Jun/2023:08:32:31 +0200] "GET / HTTP/1.1" 200 11428
+192.168.10.70 - - [14/Jun/2023:08:32:31 +0200] "GET /HNAP1/ HTTP/1.1" 404 691

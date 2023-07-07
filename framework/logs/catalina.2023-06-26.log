@@ -1,0 +1,4 @@
+26-Jun-2023 18:27:41.287 INFOS [Thread-4] org.apache.coyote.AbstractProtocol.pause Le gestionnaire de protocole ["http-nio-8080"] est mis en pause
+26-Jun-2023 18:27:41.476 INFOS [Thread-4] org.apache.catalina.core.StandardService.stopInternal Arrêt du service [Catalina]
+26-Jun-2023 18:27:41.532 INFOS [Thread-4] org.apache.coyote.AbstractProtocol.stop Arrêt du gestionnaire de protocole ["http-nio-8080"]
+26-Jun-2023 18:27:41.564 INFOS [Thread-4] org.apache.coyote.AbstractProtocol.destroy Destruction du gestionnaire de protocole ["http-nio-8080"]

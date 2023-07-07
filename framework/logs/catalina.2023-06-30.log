@@ -1,0 +1,13 @@
+30-Jun-2023 10:00:30.256 INFOS [http-nio-8080-exec-10] org.apache.coyote.http11.Http11Processor.service Erreur lors de l'analyse d'un en-tête de requête HTTP
+ Note : les occurrences suivantes d'erreurs d'analyse de requête HTTP seront enregistrées au niveau DEBUG.
+	java.lang.IllegalArgumentException: Caractère invalide trouvé dans le nom de méthode.  Les noms HTTP doivent être des "token".
+		at org.apache.coyote.http11.Http11InputBuffer.parseRequestLine(Http11InputBuffer.java:419)
+		at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:271)
+		at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65)
+		at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:890)
+		at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1789)
+		at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+		at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+		at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+		at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+		at java.lang.Thread.run(Unknown Source)
