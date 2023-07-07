@@ -20,6 +20,7 @@ public class Utilitaire {
         String[] tableau=url.split("/");
         return tableau;
     }
+
         
     public String getAnnotation(String url){
         String[] tableau=decomposer(url);
@@ -28,5 +29,16 @@ public class Utilitaire {
             return tableau[indice];
         return null;
     }
-      
+
+    /*
+        si l'urlQuery est null on ne peut pas le spliter 
+    */
+    //prendre l'argument d'un fonction
+    public String[] getArgument(String urlQuery){
+        if(urlQuery!=null){
+            String[]argument=urlQuery.split("\\&"); 
+            return argument;
+        }
+        return null;
+    }
 }

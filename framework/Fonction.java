@@ -10,6 +10,7 @@ import etu1903.frameworki.Mapping;
 import java.io.File;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
 import java.util.HashMap;
 import java.util.Set;
 import java.util.Vector;
@@ -105,13 +106,59 @@ public class Fonction {
        Field[] listeAttribut=classe.getDeclaredFields();
        return listeAttribut;
    }
+
+   /*
+    eviterna an ilay maka methode avec argument dia aleo tetezina tsirairay ilay methode rehetra ao
+    anaty classe dia alaina iza mitovy anarana amn ilay methode tina tadiavina
+   */ 
+   public Method getMethode(String nomMethode,String nomClasse)throws Exception{
+        Class classe=Class.forName(nomClasse);
+        Method methode=null;
+        for(Method m : classe.getMethods()){
+            if(m.getName().equals(nomMethode)){
+                methode=m;
+            }
+        }
+        if(methode==null)           //si la methode n'existe pas 
+            throw new Exception("la methode "+nomMethode+" n'existe pas");
+        return methode;
+   }  
+
+
+    /*
+        regle de l'appel de fonction:
+            1-tsy maintsy mitovy ny filaharan ilay arguments sy ireo arguments apetraka eny amn lien
+                ex : fonction= addEmp(int numero,String nom)
+                     lien= /do/add_EmpAnnotation?numero=1&nom=thoy
+            2-asina ? alohany itanisana argument eo amn lien
+            3-ny separateur ny chaque argument dia &
+    */
    
-    public ModelView invocationMethode(String annotation,HashMap<String,Mapping> hashmap,Object instance) throws Exception{
+    public ModelView invocationMethode(String annotation,HashMap<String,Mapping> hashmap,Object instance,String[] listeArgument) throws Exception{
        Mapping mapping=getMapping(annotation,hashmap);
-       Class classe=Class.forName(mapping.getClassname());
-       Method methode=instance.getClass().getMethod(mapping.getMethod());
-       ModelView resultat=(ModelView)methode.invoke(instance);
-      return resultat;
+       Method methode=this.getMethode(mapping.getMethod(),mapping.getClassname());
+       //obtenir les types des arguments du methode//
+       ModelView resultat=null;
+        Parameter[] parametre=methode.getParameters();
+       if(listeArgument!=null && parametre.length!=0){         //si la fonction a de l'argument 
+            Object[] argument=new Object[listeArgument.length];
+            for(int i=0;i<listeArgument.length;i++){                    
+                    Class paraType = parametre[i].getType();
+                    String[] getValueArgument=listeArgument[i].split("\\=");
+                    if(paraType.getSimpleName()=="int"){
+                        argument[i]=Integer.parseInt(getValueArgument[1]);
+                    }
+                    else if(paraType.getSimpleName().equals("String")){
+                        argument[i]=getValueArgument[1];
+                    }
+                    else if(paraType.getSimpleName().equals("double")){
+                        argument[i]=Double.parseDouble(getValueArgument[1]);
+                    }
+            }
+            resultat=(ModelView)methode.invoke(instance,argument);
+       }else{
+            resultat=(ModelView)methode.invoke(instance);       //si la fonction n'a pas d'argument
+       }
+       return resultat;
    }
-    
 }
