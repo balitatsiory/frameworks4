@@ -8,10 +8,17 @@ package servlet;
 import etu1903.frameworki.Mapping;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+import javax.servlet.annotation.MultipartConfig;
 import etu1903.frameworki.Utilitaire;
 import java.lang.reflect.Field;
 import java.util.HashMap;
@@ -21,11 +28,15 @@ import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import traitment.Fonction;
 import traitment.ModelView;
+import traitment.FileUpload;
+
 
 /**
  *
  * @author ITU
  */
+
+@MultipartConfig(maxFileSize=20000000)
 public class Frontservlet extends HttpServlet {
 
     /**
@@ -57,12 +68,10 @@ public class Frontservlet extends HttpServlet {
 
         try (PrintWriter out = response.getWriter()) {
             Utilitaire u=new Utilitaire();
-            
-            String url=request.getPathInfo();
+            String url=request.getRequestURI();
 
             String urlQuery=request.getQueryString();   //url apres le ?
         
-
             String annotation=u.getAnnotation(url);
             Fonction fonction=new Fonction();
            
@@ -74,15 +83,27 @@ public class Frontservlet extends HttpServlet {
                     Object instance=classe.newInstance();
 
                     for(int i=0;i<listeAttribut.length;i++){
-                        String attEnvoie=request.getParameter(listeAttribut[i].getName());
-                        if(listeAttribut[i].getType().getSimpleName().equals("String") && attEnvoie!=null){
-                            instance.getClass().getMethod("set"+listeAttribut[i].getName(),String.class).invoke(instance,attEnvoie);
-                        }
-                        else if(listeAttribut[i].getType().getSimpleName().equals("double") && attEnvoie!=null){
-                            instance.getClass().getMethod("set"+listeAttribut[i].getName(),double.class).invoke(instance,Double.parseDouble(attEnvoie));
-                        }
-                        else if(listeAttribut[i].getType().getSimpleName().equals("int") && attEnvoie!=null){
-                            instance.getClass().getMethod("set"+listeAttribut[i].getName(),int.class).invoke(instance,Integer.parseInt(attEnvoie));
+                        if(listeAttribut[i].getType().getSimpleName().equals("FileUpload")==false){
+                            String attEnvoie=request.getParameter(listeAttribut[i].getName());
+                            if(listeAttribut[i].getType().getSimpleName().equals("String") && attEnvoie!=null){
+                                instance.getClass().getMethod("set"+listeAttribut[i].getName(),String.class).invoke(instance,attEnvoie);
+                            }
+                            else if(listeAttribut[i].getType().getSimpleName().equals("double") && attEnvoie!=null){
+                                instance.getClass().getMethod("set"+listeAttribut[i].getName(),double.class).invoke(instance,Double.parseDouble(attEnvoie));
+                            }
+                            else if(listeAttribut[i].getType().getSimpleName().equals("int") && attEnvoie!=null){
+                                instance.getClass().getMethod("set"+listeAttribut[i].getName(),int.class).invoke(instance,Integer.parseInt(attEnvoie));
+                            }
+                        }else{
+                            Part attEnvoie=request.getPart(listeAttribut[i].getName());
+                            String nomFile=attEnvoie.getSubmittedFileName();
+                            byte[] bits=new byte[(int) attEnvoie.getSize()];
+                            //mameno an ilay tableau de byte
+                            DataInputStream dis=new DataInputStream(attEnvoie.getInputStream());
+                            dis.readFully(bits);
+                            dis.close();
+                            FileUpload fileUpload=new FileUpload(nomFile,bits);
+                            instance.getClass().getMethod("set"+listeAttribut[i].getName(),FileUpload.class).invoke(instance,fileUpload);
                         }
                     }
                 //recuperation valeur input//

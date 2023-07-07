@@ -140,6 +140,7 @@ public class Fonction {
        //obtenir les types des arguments du methode//
        ModelView resultat=null;
         Parameter[] parametre=methode.getParameters();
+
        if(listeArgument!=null && parametre.length!=0){         //si la fonction a de l'argument 
             Object[] argument=new Object[listeArgument.length];
             for(int i=0;i<listeArgument.length;i++){                    

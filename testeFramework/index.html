@@ -12,8 +12,9 @@ and open the template in the editor.
     </head>
     <body>
         <h1>Formulaire</h1>
-        <form action="do/add_Emp">
+        <form action="add_Emp.do" method="post" enctype="multipart/form-data">
             Nom:<input type="text" name="Nom">            
+            Photo: <input type="file" name="File">
             <input type="submit" value="valider">
         </form>
     </body>
