@@ -14,38 +14,46 @@ import traitment.ModelView;
  * @author ITU
  */
 public class Emp {
-    int id;
-    String nom;
+    int Id;
+    String Nom;
 
     public Emp(){}
      
     public Emp(int id, String nom) {
-        this.id = id;
-        this.nom = nom;
+        this.Id = id;
+        this.Nom = nom;
     }
 
     public int getId() {
-        return id;
+        return Id;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.Id = id;
     }
 
     public String getNom() {
-        return nom;
+        return Nom;
     }
     
     public void setNom(String nom) {
-        this.nom = nom;
+        this.Nom = nom;
     }
     
     @Myannotation(value="empall")
     public ModelView getallemployer(){
-        HashMap<String,Object> map=new HashMap<String,Object>();
-        map.put("empall",34);
+        HashMap<String,Object> 
+        map=new HashMap<String,Object>();
         ModelView view=new ModelView("AffichageEmp.jsp",map);
+        view.addItem("attribut",34);
         return view;
     }
     
+    @Myannotation(value="add_Emp")
+    public ModelView save(){
+        HashMap<String,Object> map=new HashMap<String,Object>();
+        ModelView view=new ModelView("AffichageEmp.jsp",map);
+        view.addItem("attribut",this.getNom());
+        return view;
+    }
 }
